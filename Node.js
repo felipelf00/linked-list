@@ -4,18 +4,9 @@
 //   return { value, nextNode };
 // };
 
-export const Node = (value) => {
+export const Node = (value = null) => {
   return {
-    value: value || null,
+    value: value,
     nextNode: null,
   };
 };
-
-// const Node = (value) => {
-//   return {
-//     value: value || null,
-//     nextNode: null,
-//   };
-// };
-
-// export default Node;

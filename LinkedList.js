@@ -60,7 +60,7 @@ export const LinkedList = () => {
   const contains = (value) => {
     let pointer = first;
     while (pointer) {
-      if (pointer.value.value === value) return true;
+      if (pointer.value === value) return true;
       pointer = pointer.nextNode;
     }
     return false;
@@ -70,7 +70,7 @@ export const LinkedList = () => {
     let pointer = first;
     let index = 0;
     while (pointer) {
-      if (pointer.value.value === value) return index;
+      if (pointer.value === value) return index;
       index += 1;
       pointer = pointer.nextNode;
     }
@@ -81,9 +81,9 @@ export const LinkedList = () => {
     let text = "";
     while (pointer) {
       if (pointer === first) {
-        text += `( ${pointer.value.value} )`;
+        text += `( ${pointer.value} )`;
       } else {
-        text += ` -> ( ${pointer.value.value} )`;
+        text += ` -> ( ${pointer.value} )`;
       }
       pointer = pointer.nextNode;
     }
@@ -91,9 +91,23 @@ export const LinkedList = () => {
     console.log(text);
   };
 
-  const test = () => {
-    console.log("first: " + first);
-    console.log("first.value: " + first.value);
+  const insertAt = (value, index) => {
+    const newNode = Node(value);
+    if (index === 0) {
+      newNode.nextNode = first;
+      first = newNode;
+    } else {
+      newNode.nextNode = at(index);
+      at(index - 1).nextNode = newNode;
+    }
+  };
+
+  const removeAt = (index) => {
+    if (index === 0) {
+      first = first.nextNode;
+    } else {
+      at(index - 1).nextNode = at(index + 1);
+    }
   };
 
   return {
@@ -107,7 +121,8 @@ export const LinkedList = () => {
     contains,
     find,
     toString,
-    test,
+    insertAt,
+    removeAt,
   };
 };
 
